@@ -1,0 +1,11 @@
+---
+title: "DxCC"
+output: html_document
+---
+
+## Logic
+- Minor move - know this
+- Major move - know this
+- What happens after hitting major move
+- % time finish outside of it
+- % time inside of it
