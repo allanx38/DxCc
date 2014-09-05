@@ -9,3 +9,32 @@ output: html_document
 - What happens after hitting major move
 - % time finish outside of it
 - % time inside of it
+
+```{r}
+setwd("D:/Allan/DropBox/DxCc")
+Mkt <- read.csv('DaxCac.csv')
+tail(Mkt)
+
+ln <- nrow(Mkt)
+st <- ln - 50
+Mkt <- Mkt[st:ln,]
+
+Mkt$OL <- Mkt$Open.x - Mkt$Low.x
+Mkt$OH <- Mkt$High.x -  Mkt$Open.x
+Mkt$mn <- ifelse(Mkt$OH>Mkt$OL,Mkt$OL,Mkt$OH)
+Mkt$mx <- ifelse(Mkt$OH<Mkt$OL,Mkt$OL,Mkt$OH)
+
+a <- round(quantile(Mkt$mn, probs=0.50),2)
+paste('min ', a)
+mean(Mkt$mn)
+
+b <- round(quantile(Mkt$mx, probs=0.50),2)
+paste('mquantile max 0.5 ', b)
+mean(Mkt$mx)
+
+Mkt$OC <- abs(Mkt$Open.x - Mkt$Close.x)
+mean(Mkt$OC)
+
+
+```
+
