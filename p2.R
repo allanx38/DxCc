@@ -20,12 +20,40 @@ c_p <- function(p1, p2){
   return(pp)
 }
 
+add_details <- function(pr, dy){
+  atr <- ATR(pr[c(3,4,5)], n = 14)
+  pr <- cbind(pr, atr[,c(1,2)])
+  pr$diff <- pr$Close.x - pr$Close.y
+  pr$diff_mx <- runMax(pr$diff, n=dy)
+  pr$diff_mn <- runMin(pr$diff, n=dy)
+  pr$st5 <- round((pr$diff-pr$diff_mn) / (pr$diff_mx - pr$diff_mn) * 100,0)
+  pr$diff_MA <- round(runMean(pr$diff,n=dy),2)
+  pr$diff_MAD <- pr$diff - pr$diff_MA
+  return(pr)
+}
+
 pair1 <- read.csv('boeing.csv',stringsAsFactors=F)
 tail(pair1)
 pair1$Date <- as.POSIXct(pair1$Date,format='%Y-%m-%d')
 
 pr <- c_p('boeing.csv','gen_dyn.csv')
 tail(pr)
+
+# --- OIL ---
+setwd("D:/Allan/DropBox/DxCc/oil")
+pr <- c_p('exxon.csv','total.csv')
+pr <- add_details(pr)
+tail(pr)
+write.csv(pr, 'exxon_total.csv',row.names=F)
+
+# --- banks ---
+setwd("D:/Allan/DropBox/DxCc/banks")
+pr <- c_p('hsbc.csv','barclays.csv')
+pr <- add_details(pr, 10)
+tail(pr)
+write.csv(pr, 'hsbc_barclays_10.csv',row.names=F)
+
+
 
 # 3. merge 
 
