@@ -1,0 +1,46 @@
+---
+title: "Untitled"
+output: pdf_document
+---
+
+
+```{r, echo=FALSE}
+library(Quandl)
+library(TTR)
+# enter auth code
+Quandl.auth("mW11caB1btTqNnBWGhtg")
+
+GetStock <- function(days,stock,ma){
+  end <- format(Sys.Date(), format="%Y-%m-%d")
+  start <- format((Sys.Date() - days), format="%Y-%m-%d")
+  mkt <- Quandl(stock, trim_start=start, trim_end=end,sort = "asc")
+  mkt <- mkt[c(1,2,3,4,5)]
+  colnames(mkt) <- c('Date','Open','High','Low','Close')
+  mkt <- na.omit(mkt)
+  atr <- ATR(mkt[c(3,4,5)], n = 14)
+  mkt <- cbind(mkt, atr[,c(1,2)])
+  mkt$atr <- round(mkt$atr)
+  mkt$MA <- round(runMean(mkt$Close,n=ma))
+  mkt$diff <- round(mkt$Close - mkt$MA)
+  mkt$OC <- round(mkt$Close - mkt$Open)
+  mkt$Tog <- ifelse(mkt$diff>0,mkt$Low-mkt$MA,mkt$MA-mkt$High)
+  return(mkt)
+}
+```
+
+```{r, echo=FALSE}
+fil <- c('YAHOO/L_NXT','YAHOO/L_SHP','YAHOO/L_AZN','YAHOO/L_RRS',
+         'YAHOO/L_WTB','YAHOO/L_BATS','YAHOO/L_SAB','YAHOO/L_WOS',
+         'YAHOO/L_RIO','YAHOO/L_JMAT')
+```
+
+```{r}
+for(i in 1:length(fil)){
+  print(fil[i])
+  st <- GetStock(1000,fil[i], 10)
+  print(tail(st,n=15))
+  print("")
+}
+```
+
+
