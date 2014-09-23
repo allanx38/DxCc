@@ -228,3 +228,22 @@ nxt2$MA <- round(runMean(nxt2$Close,n=10),2)
 nxt2$diff <- nxt2$Close - nxt2$MA
 
 write.csv(nxt2,"Next.csv", row.names=FALSE)
+
+# --------------------------------
+
+#path = "~/Documents/My Data/BRAZIL/Elections/"
+
+setwd("D:/VM Share/aaStocks")
+path = 'D:/VM Share/aaStocks'
+file.names <- dir(path, pattern =".csv")
+for(i in 1:length(file.names)){
+  file <- read.csv(file.names[i], stringsAsFactors=FALSE)
+  tail(file)
+}
+
+file <- read.csv('ABF.L.csv', stringsAsFactors=FALSE)
+tail(file)
+file <- read.table('ABF.L.csv',header=F, sep=",", stringsAsFactors=FALSE)
+class(file)
+file <- file[c(1,2,3)]
+

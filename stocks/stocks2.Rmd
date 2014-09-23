@@ -1,0 +1,40 @@
+---
+title: "Untitled"
+output: pdf_document
+---
+
+
+```{r, echo=FALSE}
+library(Quandl)
+library(TTR)
+# enter auth code
+Quandl.auth("mW11caB1btTqNnBWGhtg")
+
+GetStock <- function(mkt,ma){
+  atr <- ATR(mkt[c(3,4,5)], n = 14)
+  mkt <- cbind(mkt, atr[,c(1,2)])
+  mkt$atr <- round(mkt$atr)
+  mkt$MA <- round(runMean(mkt$Close,n=ma))
+  mkt$diff <- round(mkt$Close - mkt$MA)
+  mkt$OC <- round(mkt$Close - mkt$Open)
+  mkt$Tog <- ifelse(mkt$diff>0,mkt$Low-mkt$MA,mkt$MA-mkt$High)
+  return(mkt)
+}
+```
+
+```{r}
+setwd("D:/VM Share/aaStocks")
+path = 'D:/VM Share/aaStocks'
+file.names <- dir(path, pattern =".csv")
+for(i in 1:length(file.names)){
+  file <- read.table(file.names[i], header=F, sep=",", stringsAsFactors=FALSE)
+  file <- file[,c(1,2,3,4,5)]
+  colnames(file) <- c('Date','Open','High','Low','Close')
+  file <- GetStock(file,10)
+  print(file.names[i])
+  print(tail(file))
+  print("")
+}
+```
+
+
