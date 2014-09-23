@@ -247,3 +247,39 @@ file <- read.table('ABF.L.csv',header=F, sep=",", stringsAsFactors=FALSE)
 class(file)
 file <- file[c(1,2,3)]
 
+GetStock2 <- function(mkt,ma){
+  atr <- ATR(mkt[c(3,4,5)], n = 14)
+  mkt <- cbind(mkt, atr[,c(1,2)])
+  mkt$atr <- round(mkt$atr)
+  mkt$MA <- round(runMean(mkt$Close,n=ma))
+  mkt$diff <- round(mkt$Close - mkt$MA)
+  mkt$OC <- round(mkt$Close - mkt$Open)
+  mkt$Tog <- ifelse(mkt$diff>0,mkt$Low-mkt$MA,mkt$MA-mkt$High)
+  return(mkt)
+}
+
+test <- function(){
+  #browser()
+  for(i in 1:length(file.names)){
+    full_file <- paste(path, '/', file.names[i], sep="")
+    file <- read.table(full_file, header=F, sep=",", stringsAsFactors=FALSE)
+    
+    file <- file[,c(1,2,3,4,5)]
+    colnames(file) <- c('Date','Open','High','Low','Close')
+    file <- GetStock2(file,10)
+    
+    ln <- nrow(file)
+    l1 <- file[ln,9]
+    l2 <- file[ln-1,9]
+    l3 <- file[ln-2,9]
+    
+    fn <- paste(file.names[i], file[ln,5])
+    print(fn)
+    pr <- paste(l1,l2,l3)
+    print(pr)
+    #print(tail(file))
+    print("")
+  }
+}
+
+test()
