@@ -33,7 +33,7 @@ for(i in 1:length(file.names)){
   colnames(file) <- c('Date','Open','High','Low','Close')
   file <- GetStock(file,10)
   print(file.names[i])
-  print(tail(file))
+  print(tail(file,n=10))
   print("")
 }
 
