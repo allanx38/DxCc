@@ -1,4 +1,7 @@
 
+02/10
+Sht - agk, CCL, IMT, LSE, RB, RDSB, RRS, SHP, TPK, WEIR, WTB
+
 01/10
 Short - JMAT, LSE, RIO, RRS, SDR
 Long - ABF, DGE, IHG, ITRK, RB, RDSA, SSE, SVT, ULVR
@@ -18,3 +21,6 @@ Short - BATS, IHG, IMT(*), JMAT, ULVR
  
 6BDEC6371B
 yg(zdR2e
+
+ln - bnzl, ccl, itrk, lse, rb, rio, weir, wos = 
+20 + 20 - 13 - 24 + 20 + 31 +41 + 13 
