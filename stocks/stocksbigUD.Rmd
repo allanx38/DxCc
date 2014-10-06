@@ -1,0 +1,77 @@
+---
+title: "Untitled"
+output: pdf_document
+---
+
+
+```{r, echo=FALSE}
+library(Quandl)
+library(TTR)
+# enter auth code
+Quandl.auth("mW11caB1btTqNnBWGhtg")
+
+GetStock <- function(mkt,ma){
+  atr <- ATR(mkt[c(3,4,5)], n = 14)
+  mkt <- cbind(mkt, atr[,c(1,2)])
+  mkt$atr <- round(mkt$atr)
+  mkt$MA <- round(runMean(mkt$Close,n=ma))
+  mkt$diff <- round(mkt$Close - mkt$MA)
+  mkt$pdiff <- c( NA, mkt$diff[ - length(mkt$diff) ] )
+  mkt$pdiff2 <- c( NA, mkt$pdiff[ - length(mkt$pdiff) ] )
+  mkt$OC <- round(mkt$Close - mkt$Open)
+  #mkt$Tog <- ifelse(mkt$diff>0,mkt$Low-mkt$MA,mkt$MA-mkt$High)
+  return(mkt)
+}
+```
+
+## Short 
+
+```{r, echo=FALSE}
+path = 'D:/VM Share/aaStocks'
+file.names <- dir(path, pattern =".csv")
+
+for(i in 1:length(file.names)){
+  full_file <- paste(path, '/', file.names[i], sep="")
+  file <- read.table(full_file, header=F, sep=",", stringsAsFactors=FALSE)
+  file <- file[,c(1,2,3,4,5)]
+  colnames(file) <- c('Date','Open','High','Low','Close')
+  file <- GetStock(file,10)
+  
+  ln <- nrow(file)
+  if(file$diff[ln] < file$pdiff[ln])
+    {
+      if(file$pdiff[ln] < file$pdiff2[ln])
+        {
+          print(file.names[i])
+          print(tail(file,n=10))
+          print("")
+        }
+    }
+  
+}
+
+```
+
+## Long
+```{r, echo=FALSE}
+for(i in 1:length(file.names)){
+  full_file <- paste(path, '/', file.names[i], sep="")
+  file <- read.table(full_file, header=F, sep=",", stringsAsFactors=FALSE)
+  file <- file[,c(1,2,3,4,5)]
+  colnames(file) <- c('Date','Open','High','Low','Close')
+  file <- GetStock(file,10)
+  
+  ln <- nrow(file)
+  if(file$diff[ln] > file$pdiff[ln])
+    {
+      if(file$pdiff[ln] > file$pdiff2[ln])
+        {
+          print(file.names[i])
+          print(tail(file,n=10))
+          print("")
+        }
+    }
+  
+}
+```
+

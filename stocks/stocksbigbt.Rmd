@@ -26,19 +26,21 @@ GetStock <- function(mkt,ma){
 path = 'D:/VM Share/aaStocks'
 file.names <- dir(path, pattern =".csv")
 
+diff <- 100
+
 for(i in 1:length(file.names)){
   full_file <- paste(path, '/', file.names[i], sep="")
   file <- read.table(full_file, header=F, sep=",", stringsAsFactors=FALSE)
   file <- file[,c(1,2,3,4,5)]
   colnames(file) <- c('Date','Open','High','Low','Close')
   ln <- nrow(file)
-  ln2 <- ln - 3
+  ln2 <- ln - diff
   file2 <- file[1:ln2,]
   file2 <- GetStock(file2,10)
   print(file.names[i])
-  print(tail(file2,n=5))
+  print(tail(file2,n=10))
   print("")
-  print(file[(ln-2),])
+  print(file[(ln-(diff-1)),])
   print("")
 }
 
