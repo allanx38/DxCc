@@ -1,6 +1,15 @@
 
-dw - 9365
-cc - 4356
+07/10
+
+Up - CCL, IHG, JMAT, LSE, WOS
+
+Up - AGK.L Aggreko PLC, AZN.L	AstraZeneca PLC, BATS.L	British American Tobacco PLC, BNZL.L	Bunzl PLC, CCL.L	Carnival PLC, IHG.L	InterContinental Hotels Group PLC, JMAT.L	Johnson Matthey PLC, LSE.L	London Stock Exchange Group PLC, WOS.L	Wolseley PLC
+
+
+06/10
+up JMAT (2870) +36
+dn BLT (1650), ITRK (2575), RIO (2950) -20 -10 -42
+
 
 02/10
 Sht - agk, CCL, IMT, LSE, RB, RDSB, RRS, SHP, TPK, WEIR, WTB

@@ -9,11 +9,17 @@ library(TTR)
 c_p <- function(p1, p2){
   
   pair1 <- read.csv(p1,stringsAsFactors=F)
-  pair1$Date <- as.POSIXct(pair1$Date,format='%d/%m/%Y')
+  #pair1$Date <- as.POSIXct(pair1$Date,format='%d/%m/%Y')
+  pair1 <- pair1[1:5]
+  colnames(pair1) <- c('Date','Open','High','Low','Close')
+  pair1$Date <- as.POSIXct(pair1$Date,format='%m/%d/%Y')
   #pair1$Date <- as.POSIXct(pair1$Date,format='%Y-%m-%d')
   
   pair2 <- read.csv(p2,stringsAsFactors=F)
-  pair2$Date <- as.POSIXct(pair2$Date,format='%d/%m/%Y')
+  #pair2$Date <- as.POSIXct(pair2$Date,format='%d/%m/%Y')
+  pair2 <- pair2[1:5]
+  colnames(pair2) <- c('Date','Open','High','Low','Close')
+  pair2$Date <- as.POSIXct(pair2$Date,format='%m/%d/%Y')
   #pair2$Date <- as.POSIXct(pair2$Date,format='%Y-%m-%d')
   
   pp <- merge(pair1,pair2, by='Date')
@@ -38,6 +44,37 @@ pair1$Date <- as.POSIXct(pair1$Date,format='%Y-%m-%d')
 
 pr <- c_p('boeing.csv','gen_dyn.csv')
 tail(pr)
+
+# stocks
+setwd("D:/VM Share/aaStocks 2011")
+pr <- c_p('RIO.L.csv','JMAT.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'rio_jmat.csv',row.names=F)
+
+# ---
+pr <- c_p('ULVR.L.csv','RDSB.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'ulvr_rdsb.csv',row.names=F)
+
+# --
+pr <- c_p('DGE.L.csv','BLT.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'dge_blt.csv',row.names=F)
+
+# -- GOOD
+pr <- c_p('BNZL.L.csv','AGK.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'bnzl_agk.csv',row.names=F)
+
+# -- GOOD
+pr <- c_p('GSK.L.csv','CRH.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'gsk_crh.csv',row.names=F)
+
+
+tail(pr)
+
+
 
 # --- OIL ---
 setwd("D:/Allan/DropBox/DxCc/oil")
