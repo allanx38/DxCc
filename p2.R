@@ -71,6 +71,96 @@ pr <- c_p('GSK.L.csv','CRH.L.csv')
 pr <- add_details(pr,15)
 write.csv(pr, 'gsk_crh.csv',row.names=F)
 
+# -- ???
+pr <- c_p('EZJ.L.csv','IMI.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'ezj_imi.csv',row.names=F)
+
+# -- 
+pr <- c_p('STAN.L.csv','PSON.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'stan_pson.csv',row.names=F)
+
+# -- 
+pr <- c_p('ADM.L.csv','CPI.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'adm_cpi.csv',row.names=F)
+
+# -- 
+pr <- c_p('RBS.L.csv','HSBA.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'rbs_hsba.csv',row.names=F)
+
+# -- 
+pr <- c_p('RBS.L.csv','BARC.L.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'rbs_barc.csv',row.names=F)
+
+# --- Engineering
+pr <- c_p('IMI.L.csv','SMIN.L.csv')  # smthing weird ...
+pr <- add_details(pr,15)
+write.csv(pr, 'imi_smin.csv',row.names=F)
+
+pr <- c_p('SMIN.L.csv','ARM.L.csv')  # Good
+pr <- add_details(pr,15)
+write.csv(pr, 'smin_arm.csv',row.names=F)
+
+# --- Insurance
+pr <- c_p('AV.L.csv','RSA.L.csv')  # RSA ??
+pr <- add_details(pr,15)
+write.csv(pr, 'av_rsa.csv',row.names=F)
+
+pr <- c_p('AV.L.csv','LGEN.L.csv')  
+pr <- add_details(pr,15)
+write.csv(pr, 'av_lgen.csv',row.names=F)
+
+
+# --- Mining
+pr <- c_p('FRES.L.csv','ANTO.L.csv')  # Good
+pr <- add_details(pr,15)
+write.csv(pr, 'fres_anto.csv',row.names=F)
+
+pr <- c_p('BLT.L.csv','AAL.L.csv')  # Good
+pr <- add_details(pr,15)
+write.csv(pr, 'blt_aal.csv',row.names=F)
+
+pr <- c_p('RRS.L.csv','RIO.L.csv')  # Good
+pr <- add_details(pr,15)
+write.csv(pr, 'rrs_rio.csv',row.names=F)
+
+# --- Oil & Gas
+pr <- c_p('BG.L.csv','PFC.L.csv')  # Good
+pr <- add_details(pr,15)
+write.csv(pr, 'bg_pfc.csv',row.names=F)
+
+pr <- c_p('RDSA.L.csv','TPK.L.csv') # Good
+pr <- add_details(pr,15)
+write.csv(pr, 'rdsa_tpk.csv',row.names=F)
+
+# --- Pharma
+pr <- c_p('PSON.L.csv','REL.L.csv')  # Good
+pr <- add_details(pr,15)
+write.csv(pr, 'pson_rel.csv',row.names=F)
+
+pr <- c_p('SHP.L.csv','AZN.L.csv')  # ???
+pr <- add_details(pr,15)
+write.csv(pr, 'shp_azn.csv',row.names=F)
+
+
+# --- Media
+pr <- c_p('WPP.L.csv','BSY.L.csv')  # Good
+pr <- add_details(pr,15)
+write.csv(pr, 'wpp_bsy.csv',row.names=F)
+
+
+
+# --- US Stocks
+# -- 
+setwd("D:/VM Share/aaStocks")
+pr <- c_p('lmt.csv','ba.csv')
+pr <- add_details(pr,15)
+write.csv(pr, 'lmt_ba.csv',row.names=F)
+
 
 tail(pr)
 
